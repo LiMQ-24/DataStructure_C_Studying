@@ -2,12 +2,13 @@
 #include<stdlib.h>
 #include<stdbool.h>
 #define MAXSIZE 6
+#define ERROR 0
 typedef int ElementType;
 typedef struct QNode* Queue;
 struct QNode{
     ElementType Data[MAXSIZE];
-    int front;
-    int rear;
+    int Front;
+    int Rear;
 };
 Queue CreateQueue(Queue Q);
 bool IsEmpty(Queue Q);
@@ -30,15 +31,15 @@ int  main(int argc,char const*argv[])
 Queue CreateQueue(Queue Q)
 {
     Q=(Queue)malloc(sizeof(struct QNode));
-    Q->front=-1;
-    Q->rear=-1;
+    Q->Front=-1;
+    Q->Rear=-1;
     return Q;
 }
 
 /*队列是否为空*/
 bool IsEmpty(Queue Q)
 {
-    if(Q->front==Q->rear){
+    if(Q->Front==Q->Rear){
         return true;
     }else{
         return false;
@@ -48,7 +49,7 @@ bool IsEmpty(Queue Q)
 /*队列是否已满*/
 bool IsFull(Queue Q)
 {
-    if(Q->rear==MAXSIZE-1){
+    if(Q->Rear==MAXSIZE-1){
         return true;
     }else{
         return false;
@@ -62,7 +63,7 @@ void AddQueue(Queue Q,ElementType value)
         printf("队列已满!\n");
         return ;
     }else{
-        Q->Data[++Q->rear]=value;
+        Q->Data[++Q->Rear]=value;
         return ;
     }
 }
@@ -72,8 +73,8 @@ ElementType DeleteQueue(Queue Q)
 {
     if(IsEmpty(Q)){
         printf("队列已空!\n");
-        return 0;
+        return ERROR;
     }else{
-        return Q->Data[++Q->front];
+        return Q->Data[++Q->Front];
     }
 }
