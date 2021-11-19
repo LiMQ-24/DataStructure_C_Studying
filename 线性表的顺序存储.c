@@ -12,8 +12,8 @@ struct LNode{
 List CreateList(List L);    //创建一个空线性表
 List InitList(List L);      //初始化一个空线性表
 void Ergodic(List L);       //遍历一个线性表
-bool IsEmpty(List L);       //线性表是否为空
-bool IsFull(List L);        //线性表是否已满
+bool IsEmpty(List L);       //线性表是否为空（无实际意义）
+bool IsFull(List L);        //线性表是否已满 (无实际意义）
 void InsertL(List L,int i,ElementType value);     //在指定位序插入元素
 void DeleteL(List L,int i);                       //删除指定位序的元素
 ElementType FindKth(List L,int i);                //查找指定位序的元素
