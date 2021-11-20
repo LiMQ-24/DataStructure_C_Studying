@@ -1,35 +1,72 @@
-/*
-stack CreateStack(Stack S)   创建一个空栈
-bool IsEmpty(Stack S)    栈是否为空
-void PushStack(Stack S,int value)   进栈操作
-ElementType PopStack(Stack S)   出栈操作
-*/
 #include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
-#include"5_main.c"
-typedef int ElementType;
-typedef struct SNode* Stack;
-/*
+#define ERROR -1
 typedef int ElementType;
 typedef struct SNode* Stack;
 struct SNode{
-    ElementType Data;
+    int Data;
     Stack Next;
 };
-*/
-Stack CreateStack(Stack S);
-void PushStack(Stack S,ElementType value);
-bool IsEmpty(Stack S);
-ElementType PopStack(Stack S);
+Stack CreateStack(Stack S);         //创建一个空栈
+bool IsEmpty(Stack S);              //栈是否为空
+void Push(Stack S,ElementType value);           //入栈操作
+ElementType Pop(Stack S);                       //出栈操作
+
 int main(int argc,char const*argv[])
 {
     Stack PtrS=CreateStack(PtrS);
-    PushStack(PtrS,100);
-    PushStack(PtrS,200);
-    printf("%d\n",PtrS->Next->Data);
-    printf("ret1=%d\n",PopStack(PtrS));
-    printf("ret2=%d\n",PopStack(PtrS));
-    printf("ret3=%d\n",PopStack(PtrS));
-return 0;
+    Push(PtrS,100);
+    Push(PtrS,200);
+    printf("ret1=%d\n",Pop(PtrS));
+    printf("ret2=%d\n",Pop(PtrS));
+}
+
+
+//建一个空栈
+Stack CreateStack(Stack S)
+{
+    S=(Stack)malloc(sizeof(struct SNode));
+    S->Data=ERROR;
+    S->Next=NULL;
+}
+
+//判断栈是否为空
+bool IsEmpty(Stack S)
+{
+    if(S->Next==NULL){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+//入栈操作
+void Push(Stack S,ElementType value)
+{
+    Stack current=(Stack)malloc(sizeof(struct SNode));
+    current->Data=value;
+    current->Next=NULL;
+    if(S->Next==NULL){
+        S->Next=current;
+        return ;
+    }else{
+        current->Next=S->Next;
+        S->Next=current;
+        return ;
+    }
+}
+
+//出栈操作
+ElementType Pop(Stack S)
+{
+    if(IsEmpty(S)){
+        return ERROR;
+    }else{
+        Stack current=S->Next;
+        ElementType D=current->Data;
+        S->Next=S->Next->Next;
+        free(current);
+        return D;
+    }
 }
