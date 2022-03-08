@@ -1,4 +1,4 @@
-  #include<stdio.h>
+#include<stdio.h>
 #include<stdlib.h>
 #define STACK_INIT_SIZE 100 // 存储空间初始分配量
 #define STACKINCREMENT 10 //存储空间分配增量
